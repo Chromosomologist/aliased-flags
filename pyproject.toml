@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "aliased-flags"
+version = "0.1.0"
+description = "An extension to stdlib enums and flags to support powerful aliases."
+authors = ["Chromosomologist <chromosomologist@gmail.com>"]
+readme = "README.md"
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.12.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.pyright]
+strict = true
+
+# This is to stay conistent with the enum module's usage of metacls as the
+# class parameter to classmethods on the metaclass (__new__, __prepare__).
+reportSelfClsParameterName = false
+
+# Pretty much forced to use private names every now and again, as the enum
+# module likes to use _sunder_ names a lot.
+reportPrivateUsage = false
+
+
+[tool.black]
+line-length = 100
+
+
+[tool.ruff]
+line-length = 105
+
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+]
+
+target-version = "py310"
+
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401", "F403"]
