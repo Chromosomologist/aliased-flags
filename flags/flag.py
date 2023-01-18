@@ -18,7 +18,7 @@ EnumT = typing.TypeVar("EnumT", bound="AliasedEnumMeta")
 class AliasedEnumDict(enum._EnumDict):
     _cls_name: str
     alias_map: dict[str, alias.Aliased]
-    _generate_next_value_: typing.Callable[[str, int, int, list[typing.Any]], int] | None
+    _generate_next_value: typing.Callable[[str, int, int, list[typing.Any]], int] | None
 
     def __init__(
         self,
@@ -28,7 +28,7 @@ class AliasedEnumDict(enum._EnumDict):
         super().__init__()
         self.alias_map = {}
         self._cls_name = name
-        self._generate_next_value_ = generator
+        self._generate_next_value = generator
 
     def __setitem__(self, key: str, value: typing.Any) -> None:
         super().__setitem__(key, value)
