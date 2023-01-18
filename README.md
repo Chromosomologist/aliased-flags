@@ -1,7 +1,7 @@
-# Aliased-Enums
+# Allium
 
 A small extension lib to python's builtin [enum.Enum](https://docs.python.org/3/library/enum.html#enum.Enum) and [enum.Flag](https://docs.python.org/3/library/enum.html#enum.Flag) types.
-These come with the ability to set aliases for a value, which can be any kind of string - including spaces and whatnot - which you can then quickly look up. This is ideal for situations like converting an api response string into a bitmask based on values provided in that string. For more on that, see the [example in the readme](#example) or the [examples folder](https://github.com/Chromosomologist/aliased-enums/tree/master/examples)
+These come with the ability to set aliases for a value, which can be any kind of string - including spaces and whatnot - which you can then quickly look up. This is ideal for situations like converting an api response string into a bitmask based on values provided in that string. For more on that, see the [example in the readme](#example) or the [examples folder](https://github.com/Chromosomologist/allium/tree/master/examples).
 
 
 # Installation
@@ -11,20 +11,20 @@ These come with the ability to set aliases for a value, which can be any kind of
 
 To install the library, currently the only option is to install it off of this very github page.
 ```
-python3 -m pip install -U git+https://github.com/Chromosomologist/aliased-enums
+python3 -m pip install -U git+https://github.com/Chromosomologist/allium
 ```
 
 # Example
 
 ```py
->>> import flags, functools
+>>> import allium, functools
 
 >>> some_data = "foo, bar"
 
->>> class MyFlag(flags.AliasedIntFlag)
-...     x = flags.auto("foo")
-...     y = flags.auto("bar")
-...     z = flags.auto("baz")
+>>> class MyFlag(allium.AliasedIntFlag)
+...     x = allium.auto("foo")
+...     y = allium.auto("bar")
+...     z = allium.auto("baz")
 ... 
 ...     @classmethod
 ...     def from_str(cls, string: str, sep: str = ", ") -> MyFlag:
@@ -37,4 +37,4 @@ python3 -m pip install -U git+https://github.com/Chromosomologist/aliased-enums
 <MyFlag.x|y: 3>
 ```
 
-For more examples, please see the [examples folder](https://github.com/Chromosomologist/aliased-enums/tree/master/examples).
+For more examples, please see the [examples folder](https://github.com/Chromosomologist/allium/tree/master/examples).

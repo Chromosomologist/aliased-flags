@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "aliased-flags"
+name = "allium"
 version = "0.1.0"
 description = "An extension to stdlib enums and flags to support powerful aliases."
 authors = ["Chromosomologist <chromosomologist@gmail.com>"]
