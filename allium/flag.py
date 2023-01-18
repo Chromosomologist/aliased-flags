@@ -1,7 +1,7 @@
 import enum
 import typing
 
-from flags import alias
+from allium import alias
 
 __all__: typing.Sequence[str] = (
     "AliasedEnum",

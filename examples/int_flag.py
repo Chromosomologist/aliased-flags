@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import functools
 
-import flags
+import allium
 
 
-class MyFlag(flags.AliasedIntFlag):
-    x = flags.auto("foo")
-    y = flags.auto("bar")
-    z = flags.auto("baz")
+class MyFlag(allium.AliasedIntFlag):
+    x = allium.auto("foo")
+    y = allium.auto("bar")
+    z = allium.auto("baz")
 
     @classmethod
     def from_str(cls, string: str, sep: str = ", ") -> MyFlag:
