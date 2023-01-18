@@ -9,7 +9,7 @@ __all__: typing.Sequence[str] = ("auto", "aliased")
 
 class Aliased:
     value: typing.Any
-    aliases: tuple[str]
+    aliases: tuple[str, ...]
 
     def __new__(cls, value: typing.Any, *aliases: str):
         if isinstance(value, enum.auto):
