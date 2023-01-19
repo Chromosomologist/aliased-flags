@@ -54,7 +54,7 @@ def auto(*aliases: str) -> enum.auto:
         >>> MyFlag["Foo"]
         <MyFlag.x: 1>
     """
-    return AliasedAuto("a", *aliases) if aliases else typing.cast(enum.auto, enum.auto())
+    return AliasedAuto(*aliases) if aliases else typing.cast(enum.auto, enum.auto())
 
 
 def aliased(value: typing.Any, *aliases: str) -> Aliased:
