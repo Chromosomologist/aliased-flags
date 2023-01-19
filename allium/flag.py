@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import enum
 import typing
 
@@ -52,17 +54,21 @@ class AliasedEnumDict(enum._EnumDict):
     def get_aliases(self, key: str) -> tuple[str, ...]:
         alias_obj = self.alias_map[key]
         if alias_obj:
+            print(alias_obj.aliases)
             return alias_obj.aliases
 
         return ()
 
 
 class AliasedEnumMeta(enum.EnumMeta):
-    _alias_map_: dict[str, enum.Enum]
 
-    if typing.TYPE_CHECKING:
-        # Coping with poor typeshed.
+    # First we override some types we inherit from EnumMeta to contain
+    # AliasedEnums instead of Enums.
+    _member_map_: dict[str, AliasedEnum]  # type: ignore
+    _value2member_map_: dict[typing.Any, AliasedEnum]  # type: ignore
+    _alias_map_: dict[str, AliasedEnum]
 
+    if typing.TYPE_CHECKING:  # Coping with poor typeshed.
         @staticmethod
         def _check_for_existing_members(name: str, bases: tuple[type, ...]) -> None:
             ...
@@ -80,13 +86,26 @@ class AliasedEnumMeta(enum.EnumMeta):
     ) -> EnumT:
         new = super().__new__(metacls, cls, bases, classdict, **kwds)
 
-        new._alias_map_ = {}
+        new._alias_map_ = alias_map = {}
         for name, member in new._member_map_.items():
-            assert isinstance(member, AliasedEnum)
+            aliases = classdict.get_aliases(name)
+            for single_alias in aliases:
+                print(single_alias)
+                if single_alias in new._member_map_:
+                    raise ValueError(
+                        f"In field {member!r}: alias {single_alias!r} is already used as "
+                        f"the name for field {new._member_map_[single_alias]!r}."
+                    )
 
-            member._aliases_ = classdict.get_aliases(name)
-            for single_alias in member._aliases_:
-                new._alias_map_[single_alias] = member
+                if single_alias in alias_map:
+                    raise ValueError(
+                        f"In field {member!r}: alias {single_alias!r} is already registered "
+                        f" as an alias for field {alias_map[single_alias]!r}"
+                    )
+
+                alias_map[single_alias] = member
+
+            member._aliases_ = aliases
 
         return new
 
