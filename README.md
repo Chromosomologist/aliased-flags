@@ -25,7 +25,7 @@ python3 -m pip install -U git+https://github.com/Chromosomologist/allium
 ...     x = allium.auto("foo")
 ...     y = allium.auto("bar")
 ...     z = allium.auto("baz")
-... 
+...
 ...     @classmethod
 ...     def from_str(cls, string: str, sep: str = ", ") -> MyFlag:
 ...         # 1. Get all items in the string,

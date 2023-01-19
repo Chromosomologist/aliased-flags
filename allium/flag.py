@@ -69,6 +69,7 @@ class AliasedEnumMeta(enum.EnumMeta):
     _alias_map_: dict[str, AliasedEnum]
 
     if typing.TYPE_CHECKING:  # Coping with poor typeshed.
+
         @staticmethod
         def _check_for_existing_members(name: str, bases: tuple[type, ...]) -> None:
             ...
