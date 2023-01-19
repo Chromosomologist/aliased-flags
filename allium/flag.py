@@ -54,7 +54,6 @@ class AliasedEnumDict(enum._EnumDict):
     def get_aliases(self, key: str) -> tuple[str, ...]:
         alias_obj = self.alias_map[key]
         if alias_obj:
-            print(alias_obj.aliases)
             return alias_obj.aliases
 
         return ()
@@ -91,7 +90,7 @@ class AliasedEnumMeta(enum.EnumMeta):
         for name, member in new._member_map_.items():
             aliases = classdict.get_aliases(name)
             for single_alias in aliases:
-                print(single_alias)
+
                 if single_alias in new._member_map_:
                     raise ValueError(
                         f"In field {member!r}: alias {single_alias!r} is already used as "
