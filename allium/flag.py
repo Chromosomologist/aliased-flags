@@ -52,7 +52,7 @@ class AliasedEnumDict(enum._EnumDict):
     __raw_setitem__ = dict[str, typing.Any].__setitem__
 
     def get_aliases(self, key: str) -> tuple[str, ...]:
-        alias_obj = self.alias_map[key]
+        alias_obj = self.alias_map.get(key)
         if alias_obj:
             return alias_obj.aliases
 
